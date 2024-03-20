@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Bootstrap Buttons</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Multiple Bootstrap Buttons</h1>
+
+    <button class="btn btn-primary mt-3" onclick="toggleText('hiddenText1')">Показать текст 1</button>
+  <button class="btn btn-primary mt-3" onclick="toggleText('hiddenText4')">Показать решение</button>
+    <div id="hiddenText1" class="mt-3" style="display: none;">
+        <p>Текст, который появляется при нажатии на кнопку 1.</p>
+    </div>
+
+    <button class="btn btn-success mt-3" onclick="toggleText('hiddenText2')">Показать текст 2</button>
+    <div id="hiddenText2" class="mt-3" style="display: none;">
+        <p>Текст, который появляется при нажатии на кнопку 2.</p>
+    </div>
+</div>
+
+<script>
+    function toggleText(elementId) {
+        var hiddenText = document.getElementById(elementId);
+        hiddenText.style.display = (hiddenText.style.display === 'none' || hiddenText.style.display === '') ? 'block' : 'none';
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
