@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Гипербола</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обратная пропорциональность</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2012/2012161.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body background="../../img/6.png">
+<div class="d-flex flex-column flex-md-row align-items-center pb-0.5 mb-3 border-bottom">
+    <a href="../../index.html" class="d-flex align-items-center text-dark text-decoration-none">
+        <img src="https://cdn-icons-png.flaticon.com/512/8203/8203764.png" width="50" height="50" alt="" title=""
+             class="img-small">
+        <span class="m-2 fs-4 fw-bold"> Подготовка к 17 заданию ЕГЭ
+        </span>
+    </a>
+    <nav class="d-inline-flex mt-2 mt-md-3 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="../bank.html"><h5 class="fw-bold">Банк заданий <img
+                src="https://cdn-icons-png.flaticon.com/512/7219/7219693.png" width="38" height="38" alt="" title=""
+                class="img-small"></h5></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="../razdelenie.html"><h5 class="fw-bold">Основной
+            курс
+            <img src="https://cdn-icons-png.flaticon.com/512/5833/5833290.png " width="40" height="40" alt=""
+                 title="" class="img-small"></h5></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="../teoria/property.html">
+            <h5 class="fw-bold  ">Свойства <img src="   https://cdn-icons-png.flaticon.com/512/4542/4542600.png " width="40" height="40" alt="" title="" class="img-small">
+            </h5>
+        </a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="../functions/obs.html"><h5 class="fw-bold  "> Графики
+             <img src="   https://cdn-icons-png.flaticon.com/512/10790/10790831.png " width="40" height="40"
+                         alt="" title="" class="img-small"></h5></a>
+    </nav>
+</div>
+<div class="container mt-5">
+    <h1 class="text-center">Обратная пропорциональность</h1>
+    <div class="row mt-4 fw-semibold p-2 fs-5">
+        <div class="col-md-6 p-2">
+            <h2 class="text-center">Определение</h2>
+            <ul>
+                <li>Функция обратной пропорциональности имеет вид <em>y = k/x + b</em>, где <em>k</em> и <em>b</em> - коэффициенты.</li>
+                  <li>График функции - гипербола в плоскости (x, y).</li>
+                <li>Нули функции - нет нулей, так как x не может быть равно 0.</li>
+                <li>Прямая проходит через точку (0, <em>b</em>).</li>
+                <li>Функция является нечетной, если <em>k</em> нечетное число; и четной, если <em>k</em> четное.</li>
+            </ul>
+        </div>
+        <div class="col-md-6 p-2">
+            <h2 class="text-center">Свойства</h2>
+            <ul>
+                <li>Область определения - все действительные числа, кроме x = 0.</li>
+                <li>Область значений - все действительные числа (<em>y</em> принимает любые значения).</li>
+                <li>Промежутки возрастания - при <em>k > 0</em>, функция убывает; при <em>k < 0</em>, функция возрастает.</li>
+                <li>Промежутки убывания - при <em>k > 0</em>, функция возрастает; при <em>k < 0</em>, функция убывает.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h2 class="text-center">График</h2>
+        <div id="plot" style="width:100%; height:400px;"></div>
+    </div>
+    <div class="mt-4 text-center">
+        <h2>Влияние коэффициентов</h2>
+        <div class="row p-3">
+            <div class="col-md-6">
+                <h3>Изменение коэффициента b</h3>
+                <div id="plotB" style="width:100%; height:400px;"></div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-center">Изменение коэффициента k</h3>
+                <div id="plotK" style="width:100%; height:400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    function inverseProportionality(x, k, b) {
+        return k / x + b;
+    }
+
+    var xValues = Array.from({ length: 100 }, (_, i) => (i === 50) ? 0 : (i / 10 - 5)); // x от -5 до 5, исключая 0
+    var k = 2, b = 1;
+
+    var yValues = xValues.map(x => inverseProportionality(x, k, b));
+
+    var trace = {
+        x: xValues,
+        y: yValues,
+        type: 'scatter',
+        mode: 'lines',
+        name: 'y = \frac{2}{x} + 1'
+    };
+
+    var layout = {
+        title: 'y = k/x',
+        xaxis: {
+            title: 'x'
+        },
+        yaxis: {
+            title: 'y'
+        }
+    };
+
+    Plotly.newPlot('plot', [trace], layout);
+
+    // Влияние коэффициентов
+    var bValues = [-2, 0, 2];
+    var kValues = [0.5, 2, -1];
+
+    var traceB = bValues.map(bVal => ({
+        x: xValues,
+        y: xValues.map(x => inverseProportionality(x, k, bVal)),
+        type: 'scatter',
+        mode: 'lines',
+        name: 'y = \frac{2}{x} + ' + bVal
+    }));
+
+    var traceK = kValues.map(kVal => ({
+        x: xValues,
+        y: xValues.map(x => inverseProportionality(x, kVal, b)),
+        type: 'scatter',
+        mode: 'lines',
+        name: 'y = \frac{' + kVal + '}{x} + 1'
+    }));
+
+    Plotly.newPlot('plotB', traceB, layout);
+    Plotly.newPlot('plotK', traceK, layout);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
